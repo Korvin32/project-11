@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ez="http://java.sun.com/jsf/composite/ezcomp">
+<body>
+	<ui:composition template="./WEB-INF/template.xhtml">
+		<ui:define name="content">
+			<f:view transient="true">
+				
+				<f:metadata>
+					<f:viewAction transient="true" action="#{listCustomers.refresh}" />
+				</f:metadata>
+				
+				<h:form id="frmCreateCustomer">
+					<h:commandLink action="jsf.ajax.handlers" value="JSF Ajax Handlers Example" />
+					<h:panelGrid columns="3">
+						<h:outputLabel for="txtCustomerName" value="Customer name" />
+						<h:inputText id="txtCustomerName" value="#{customerData.name}" />
+						<h:message for="txtCustomerName" styleClass="error" />
+						<div />
+						<h:commandButton id="cmdRegisterCustomer" value="Submit"
+							action="customers"
+							actionListener="#{customerRegistationAction.register}">
+							<f:actionListener binding="#{listCustomers.sortByDefault}" />
+							<f:ajax execute="@form" render="@form :frmListCustomers" />
+							<!-- 03 -->
+						</h:commandButton>
+						<h:message for="cmdRegisterCustomer" styleClass="error" />
+					</h:panelGrid>
+				</h:form>
+				
+				<br />
+				<input id="blockButton" type="submit" value="Block" />
+				<input id="unblockButton" type="submit" value="Unblock" />
+				<br />
+				
+				<h:form id="frmListCustomers">
+					<!-- 02 -->
+					<div id="container">
+						<ez:paginator paginateModel="#{listCustomers}">
+							<!-- 04 -->
+							<h:dataTable value="#{listCustomers.data}" var="cust">
+								<!-- 05 -->
+								<h:column>
+									<f:facet name="header">
+										<h:commandLink value="Name"
+											actionListener="#{listCustomers.sort('name')}">
+											<f:ajax execute="@form" render="@form" />
+											<!-- 06-->
+										</h:commandLink>
+									</f:facet>
+									<h:outputText value="#{cust.name}" />
+								</h:column>
+							</h:dataTable>
+						</ez:paginator>
+					</div>
+				</h:form>
+
+				<h:form id="frmListCustomers2">
+					<!-- 02 -->
+					<ez:paginator paginateModel="#{listCustomers}">
+						<!-- 04 -->
+						<ui:repeat value="#{listCustomers.data}" var="cust">
+							<!-- 05 -->
+								<h:outputText value="#{cust.name}" />
+						</ui:repeat>
+					</ez:paginator>
+				</h:form>
+				
+				<h:form id="frmListCustomers3">
+					<!-- 02 -->
+					<ez:paginator paginateModel="#{listCustomers}">
+						<!-- 04 -->
+						<ul>
+							<ui:repeat value="#{listCustomers.dataAsList}" var="cust">
+								<!-- 05 -->
+								<li>
+									<h:outputText value="#{cust.name}" />
+								</li>
+							</ui:repeat>
+						</ul>
+					</ez:paginator>
+				</h:form>
+				
+			</f:view>
+			
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

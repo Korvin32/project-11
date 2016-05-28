@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>JSF Ajax Handlers</title>
+
+	<script src="js/jquery-1.3.js" />
+	<script src="js/blockUI.js" />
+
+ 	<h:outputStylesheet library="css" name="jsf.ajax.handlers.css"/>
+ 	
+ 	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+ 	<h:outputScript library="js" name="jsf.ajax.handlers.js" target="head" />
+</h:head>
+<h:body>
+	<div id="container">
+		<h:inputTextarea id="statusArea" cols="40" rows="10" readonly="true" disabled="true" style="resize: none;" />
+	</div>
+	<h:form id="form1">
+		<h:panelGrid id="panelGrid1" columns="2">
+			<h:outputText id="uuid" value="#{indexBean.uuid}" style="font-size: 18px; font-weight: bold; color: salmon;" />
+			<h:message for="uuid" />
+			<h:panelGroup id="panelGroup1">
+				<h:commandButton id="submitButton" value="Generate UUID" actionListener="#{indexBean.generateUUID()}">
+					<f:ajax execute="@form" render="panelGrid1" />
+				</h:commandButton>
+			</h:panelGroup>
+		</h:panelGrid>
+		<div class="modal">
+			<!-- Place at bottom of page -->
+		</div>
+	</h:form>
+</h:body>
+</html>
