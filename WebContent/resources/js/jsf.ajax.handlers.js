@@ -44,7 +44,7 @@ function handleAjax(data) {
 }
 
 function handleAjaxWithBlockUI(data) {
-	console.log("In 'handleAjax()'. data = " + JSON.stringify(data));
+	console.log("In 'handleAjaxWithBlockUI()'. data = " + JSON.stringify(data));
 	
 	var status = data.status;
 	
