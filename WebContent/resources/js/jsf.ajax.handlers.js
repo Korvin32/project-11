@@ -1,6 +1,6 @@
 var statusUpdate = function statusUpdate(data) {
 	
-	console.log("In 'statusUpdate()'. Data='" + data + "'");
+	console.log("In 'statusUpdate()'. Data='" + JSON.stringify(data) + "'");
 	
 	var statusArea = document.getElementById("statusArea");
 	var text = statusArea.value;
@@ -18,6 +18,8 @@ var statusUpdate = function statusUpdate(data) {
 };
 
 function handleAjax(data) {
+	console.log("In 'handleAjax()'. data = " + JSON.stringify(data));
+	
 	var status = data.status;
 	
 	console.log("In 'handleAjax()'. Status='" + status + "'");
@@ -42,6 +44,8 @@ function handleAjax(data) {
 }
 
 function handleAjaxWithBlockUI(data) {
+	console.log("In 'handleAjax()'. data = " + JSON.stringify(data));
+	
 	var status = data.status;
 	
 	console.log("In 'handleAjaxWithBlockUI()'. Status='" + status + "'");
